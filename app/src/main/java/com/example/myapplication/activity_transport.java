@@ -14,8 +14,8 @@ public class activity_transport extends AppCompatActivity {
         ImageButton btncar,btnbus;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transport);
-        btncar = (ImageButton) findViewById(R.id.imageButton19);
-        btnbus = (ImageButton) findViewById(R.id.imageButton20);
+        btncar = findViewById(R.id.imageButton19);
+        btnbus = findViewById(R.id.imageButton20);
         btncar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
