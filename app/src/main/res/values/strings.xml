@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="title_activity_maps">Map</string>
+    <string name="mapsbutton"><![CDATA[交通有困難? 點這裡->]]></string>
 
 
     <string-array name="live_intro_1">

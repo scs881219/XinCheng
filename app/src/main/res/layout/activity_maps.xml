@@ -16,10 +16,11 @@
             android:id="@+id/imageButton12"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/backhome" />
     </LinearLayout>
+
 
 
 
@@ -59,7 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:background="@drawable/mk3_2"
                 android:text="Button" />
 
@@ -69,7 +70,7 @@
                 android:layout_height="80dp"
                 android:background="@drawable/mk1_2"
                 android:layout_weight="1"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:text="Button" />
 
             <ImageButton
@@ -86,7 +87,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -94,26 +95,26 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_gravity="end|center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:text="交通有困難? 點這裡->"
-                android:textAlignment="textEnd"
-                android:textColor="#009688"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:shadowColor="@color/text_shadow"
+                android:shadowColor="@color/text_shadow_white"
                 android:shadowDx="1"
                 android:shadowDy="2"
-                android:shadowRadius="3"/>
+                android:shadowRadius="3"
+                android:text="@string/mapsbutton"
+                android:textAlignment="textEnd"
+                android:textColor="#49A199"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/buttonx"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
                 android:background="@drawable/cars" />

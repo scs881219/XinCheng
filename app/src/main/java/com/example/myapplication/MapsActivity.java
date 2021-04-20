@@ -124,12 +124,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             checkstyle();;
             }
         });
+
         transport.setOnClickListener(new View.OnClickListener(){
             @Override
                 public void onClick(View view){
-                    Intent intent = new Intent();
-                    intent.setClass(MapsActivity.this,activity_transport.class);
-                    startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(MapsActivity.this,activity_transport.class);
+                startActivity(intent);
                 }
         });
 
