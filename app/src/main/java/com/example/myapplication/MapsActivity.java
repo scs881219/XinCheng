@@ -84,12 +84,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        btn1 = (ImageButton) findViewById(R.id.imageButton12);
-        btn2 = (ImageButton) findViewById(R.id.imageButton16);
-        a1 = (ImageButton) findViewById(R.id.button);
-        a2 = (ImageButton) findViewById(R.id.button2);
-        a3 = (ImageButton) findViewById(R.id.button3);
-        transport = (ImageButton) findViewById(R.id.buttonx);
+        btn1 = findViewById(R.id.imageButton12);
+        btn2 = findViewById(R.id.imageButton16);
+        a1 = findViewById(R.id.button);
+        a2 = findViewById(R.id.button2);
+        a3 = findViewById(R.id.button3);
+        transport = findViewById(R.id.buttonx);
         b1=1;
         b2=1;
         b3=1;
@@ -121,7 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     b3=0;
                 else
                     b3=1;
-            checkstyle();;
+            checkstyle();
             }
         });
 
