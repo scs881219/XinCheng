@@ -61,7 +61,7 @@ public class introduction extends AppCompatActivity {
                     }
                 }
         );
-        if(str.equals("live")==true){
+        if(str.equals("live")){
             switch (number){
                 case 0:
                     show = getResources().getStringArray(R.array.live_intro_1);
@@ -82,7 +82,7 @@ public class introduction extends AppCompatActivity {
             }
             Main.setBackgroundResource(R.drawable.bg_4);
         }
-        else if(str.equals("play")==true){
+        else if(str.equals("play")){
             switch (number){
                 case 0:
                     show = getResources().getStringArray(R.array.play_intro_1);
@@ -165,7 +165,7 @@ public class introduction extends AppCompatActivity {
             }
             Main.setBackgroundResource(R.drawable.bg_5);
         }
-        else if(str.equals("eat")==true){
+        else if(str.equals("eat")){
             switch (number){
                 case 0:
                     show = getResources().getStringArray(R.array.eat_intro_1);
