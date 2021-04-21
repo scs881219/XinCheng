@@ -246,7 +246,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
 
 
-        if(str.equals("live")==true) {
+        if(str.equals("live")) {
             switch (number) {
                 case 0:
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(太魯閣蘇西小空間, 15) );
@@ -286,7 +286,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         }
-        else if(str.equals("play")==true) {
+        else if(str.equals("play")) {
             switch (number) {
                 case 0:
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(新城車站, 15));
@@ -331,7 +331,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         }
-            else if(str.equals("eat")==true) {
+            else if(str.equals("eat")) {
             switch (number) {
                 case 0:
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(台灣牛牛肉麵, 15));
@@ -410,7 +410,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Criteria criteria = new Criteria();
         bestProv = locationManager.getBestProvider(criteria, true);
         if (checkLocationPermission()) {
-            locationManager.requestLocationUpdates(bestProv, 1000,1, (LocationListener) MapsActivity.this);
+            locationManager.requestLocationUpdates(bestProv, 1000,1, MapsActivity.this);
         }
 
 
@@ -419,7 +419,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onPause() {
         super.onPause();
-        locationManager.removeUpdates((LocationListener) this);
+        locationManager.removeUpdates(this);
     }
 
     public void onLocationChanged(Location location) {
