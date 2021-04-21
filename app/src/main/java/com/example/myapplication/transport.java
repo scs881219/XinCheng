@@ -7,28 +7,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class activity_transport extends AppCompatActivity {
+public class transport extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ImageButton btncar,btnbus;
+        ImageButton btn1,btn2,btn;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transport);
-        btncar = findViewById(R.id.imageButton19);
-        btnbus = findViewById(R.id.imageButton20);
-        btncar.setOnClickListener(new View.OnClickListener() {
+        btn = findViewById(R.id.imageButton8);
+        btn1 = findViewById(R.id.imageButton19);
+        btn2 = findViewById(R.id.imageButton20);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 car();
             }
         });
-        btnbus.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bus();
             }
         });
-
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn();
+            }
+        });
     }
 
     public void car(){
@@ -41,6 +48,9 @@ public class activity_transport extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void btn(){
+        Intent intent = new Intent(this, home.class);
+        startActivity(intent);
+    }
 
 }

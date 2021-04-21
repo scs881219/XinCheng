@@ -69,7 +69,7 @@
         <activity android:name=".MainActivity3" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".activity_transport" />
+        <activity android:name=".transport" />
 
         <service
             android:name=".MusicService"

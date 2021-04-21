@@ -73,17 +73,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         number = it.getIntExtra("pos",0);
         str = it.getStringExtra("kinds");
 
-        if(str.equals("live")==true&&number==2)
-            ;
-        else
-        {
-            b1=1;
-            b2=1;
-            b3=1;
-        }
-
-
-
         btn1 = findViewById(R.id.imageButton12);
         btn2 = findViewById(R.id.imageButton16);
         a1 = findViewById(R.id.button);
@@ -93,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         b1=1;
         b2=1;
         b3=1;
+
         a1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
                 public void onClick(View view){
                 Intent intent = new Intent();
-                intent.setClass(MapsActivity.this,activity_transport.class);
+                intent.setClass(MapsActivity.this,transport.class);
                 startActivity(intent);
                 }
         });
@@ -147,9 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent it = new Intent(MapsActivity.this,introduction.class);
                 it.putExtra("pos",judge_pos);
                 it.putExtra("kinds",judge_kinds);
-                mMap.clear();
                 startActivity(it);
-
             }
         });
 

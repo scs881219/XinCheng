@@ -15,12 +15,11 @@
 
         <ImageButton
             android:id="@+id/imageButton9"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="16dp"
+            android:layout_width="22dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
-            android:background="@drawable/back"
-            />
+            android:background="@drawable/back" />
     </LinearLayout>
 
     <LinearLayout
@@ -28,7 +27,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/three"
         android:orientation="vertical">
-
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -39,6 +37,7 @@
             android:layout_gravity="center_horizontal" >
 
         </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
 
