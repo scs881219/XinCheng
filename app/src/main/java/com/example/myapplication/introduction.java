@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.net.Uri;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,12 +21,13 @@ import java.util.List;
 public class introduction extends AppCompatActivity {
 
     private ViewPager2 viewPager2;
-    private TextView title,content,address,phone,time;
+    private TextView title,content,address,phone,time,website;
     private String [] show;
     private LinearLayout Main;
     private ImageButton back,locate;
     public int number ;
     public String str;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class introduction extends AppCompatActivity {
         address = findViewById(R.id.address);
         phone = findViewById(R.id.phone);
         time = findViewById(R.id.time);
+        website = findViewById(R.id.website);
         locate=findViewById(R.id.imageView6);
         viewPager2 = findViewById(R.id.viewPager2);
         back = findViewById(R.id.BackTo);
@@ -52,15 +54,6 @@ public class introduction extends AppCompatActivity {
         Intent it = getIntent();
         number = it.getIntExtra("pos",0);
         str = it.getStringExtra("kinds");
-        locate=findViewById(R.id.imageView6);
-        locate.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        map();
-                    }
-                }
-        );
         if(str.equals("live")){
             switch (number){
                 case 0:
@@ -240,6 +233,19 @@ public class introduction extends AppCompatActivity {
         address.setText(show[2]);
         time.setText(show[3]);
         phone.setText(show[4]);
+        website.setText(show[5]);
+
+        imageView = findViewById(R.id.imageView8);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri uri = Uri.parse(String.format("tel:%1$s",show[4]));
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
 
         viewPager2.setAdapter(new ViewpagerAdapter(sliderItems,introduction.this));
 
@@ -258,11 +264,11 @@ public class introduction extends AppCompatActivity {
             }
         });
         viewPager2.setPageTransformer(compositePageTransformer);
+
     }
-    public void map(){
-        Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("pos",number);
-        intent.putExtra("kinds",str);
-        startActivity(intent);
+
+
+    public void onBackPressed() {
+        finish();
     }
 }

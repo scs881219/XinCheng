@@ -24,7 +24,7 @@ import java.util.List;
 
 public class PagerFragmentThird extends Fragment {
     private int position;
-    private TextView title,content,address,phone,time;
+    private TextView title,content,address,phone,time,website;
     private String[] show;
     private List<SliderItem> sliderItems = new ArrayList<>();
     private ViewPager2 viewPager2;
@@ -52,6 +52,7 @@ public class PagerFragmentThird extends Fragment {
         address = root.findViewById(R.id.address);
         phone = root.findViewById(R.id.phone);
         time = root.findViewById(R.id.time);
+        website = root.findViewById(R.id.website);
         viewPager2 = root.findViewById(R.id.viewPager2);
         Main = root.findViewById(R.id.main);
         dot_container = root.findViewById(R.id.indicator_view);
@@ -153,6 +154,7 @@ public class PagerFragmentThird extends Fragment {
         address.setText(show[2]);
         time.setText(show[3]);
         phone.setText(show[4]);
+        website.setText(show[5]);
         Main.setBackgroundResource(R.drawable.bg_6);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

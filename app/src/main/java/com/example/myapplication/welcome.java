@@ -14,7 +14,7 @@ public class welcome extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    Thread.sleep(3500);
+                    Thread.sleep(3000);
                     startActivity(new Intent().setClass(welcome.this, home.class));
                 }catch (InterruptedException e){
                     e.printStackTrace();

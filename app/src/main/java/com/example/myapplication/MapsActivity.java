@@ -41,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private LocationManager locationManager;
     private Location location;
-    private ImageButton btn1, btn2,a1,a2,a3,transport;
+    private ImageButton btn1,btn2,a1,a2,a3,transport;
     String bestProv;
     private int judge_pos = 0;
     private String judge_kinds = "eat";
@@ -91,7 +91,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else
                     b1=1;
                 checkstyle();
-
             }
         });
         a2.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     b3=0;
                 else
                     b3=1;
-            checkstyle();
+                checkstyle();
             }
         });
 
@@ -412,8 +411,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (checkLocationPermission()) {
             locationManager.requestLocationUpdates(bestProv, 1000,1, MapsActivity.this);
         }
-
-
     }
 
     @Override
