@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="title_activity_maps">Map</string>
-    <string name="mapsbutton"><![CDATA[交通有困難? 點這裡->]]></string>
+    <string name="mapsbutton"><![CDATA[交通需要幫助? 點這裡->]]></string>
     <string name="textview">TextView</string>
 
 

@@ -18,6 +18,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -70,6 +71,8 @@
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity" />
         <activity android:name=".transport" />
+        <activity android:name=".transport_bus" />
+        <activity android:name=".transport_car"/>
 
         <service
             android:name=".MusicService"
