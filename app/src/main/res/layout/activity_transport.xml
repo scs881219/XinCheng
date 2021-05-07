@@ -35,7 +35,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
-            android:background="@drawable/transcar"/>
+            android:background="@drawable/bus302" />
 
         <ImageButton
             android:id="@+id/imageButton20"
@@ -43,7 +43,16 @@
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
-            android:background="@drawable/transbus"/>
+            android:background="@drawable/bus310"/>
+
+        <ImageButton
+            android:id="@+id/imageButton21"
+            android:layout_width="290dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/bus1133"/>
+
     </LinearLayout>
 
 </LinearLayout>

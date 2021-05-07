@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class transport_bus extends AppCompatActivity {
-private ImageButton btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent=this.getIntent();
+        String url = intent.getStringExtra("weburl");
         setContentView(R.layout.transport_bus);
-        btn = findViewById(R.id.imageButton8);
+        ImageButton btn = findViewById(R.id.imageButton8);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +39,7 @@ private ImageButton btn;
         WebView webview = (WebView) findViewById(R.id.web_view);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient()); //不調用系統瀏覽器
-        webview.loadUrl("https://www.taiwanbus.tw/eBUSPage/Query/QueryResult.aspx?rno=03020&rn=1610357653078");
+        webview.loadUrl(url);
     }
 
     public void back(){

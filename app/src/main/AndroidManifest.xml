@@ -72,7 +72,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".transport" />
         <activity android:name=".transport_bus" />
-        <activity android:name=".transport_car"/>
 
         <service
             android:name=".MusicService"
