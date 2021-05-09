@@ -72,10 +72,14 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".transport" />
         <activity android:name=".transport_bus" />
+        <activity android:name=".orienteering" />
 
         <service
             android:name=".MusicService"
             android:enabled="true" />
+
+        <receiver android:name=".GeofenceBroadcastReceiver"/>
+
     </application>
 
 </manifest>

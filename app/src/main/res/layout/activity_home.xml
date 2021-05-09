@@ -12,9 +12,7 @@
         android:layout_height="53dp"
         android:background="@drawable/home1"
         android:orientation="vertical">
-
-
-</LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,13 +51,6 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="vertical"></LinearLayout>
-
-
         </LinearLayout>
 
 
@@ -68,15 +59,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,6 +82,23 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/homebt4" />
+
+                <ImageButton
+                    android:id="@+id/imageButton_Orienteering"
+                    android:layout_width="185dp"
+                    android:layout_height="161dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/homebtorienteering" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
 
 
             </LinearLayout>

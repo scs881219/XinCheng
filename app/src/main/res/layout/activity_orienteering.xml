@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".orienteering">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@drawable/home1"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButton12"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/backhome" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/c2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/textView_OrienTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Spot Name"
+            android:textColor="#185ABC"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <fragment
+                    android:id="@+id/mapOrien"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    tools:context=".MapsActivity" />
+
+                <Button
+                    android:id="@+id/button_OrienNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="請前往目標地點以通關" />
+
+                <TextView
+                    android:id="@+id/textView_OrienDescribe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="坐落太魯閣國家公園入口的新城(太魯閣)車站，於101年11月開工進行改建，其嶄新建築之站體就如同一件藝術品，以「門」的意象形塑本車站，參採隱喻立霧溪切割太魯閣峽谷，呈現V形的立面，展現花東第一門面之氣勢與獨特迎賓視覺的意象，另書法家朱振南老師為車站站名題字更增添文化氣息，車站改建後除了有便利的旅運設施、友善車站環境，同時亦將公共藝術之美學引領至公共空間，使交通與人文藝術有美麗邂逅。"
+                    android:textColor="#383838"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/card_test_01" />
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

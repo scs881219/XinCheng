@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class home extends AppCompatActivity {
-    private ImageButton btn1, btn2, btn3, btn4;
+    private ImageButton btn1, btn2, btn3, btn4, btnOrien;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +18,7 @@ public class home extends AppCompatActivity {
         btn2=(ImageButton)findViewById(R.id.imageButton2);
         btn3=(ImageButton)findViewById(R.id.imageButton3);
         btn4=(ImageButton)findViewById(R.id.imageButton4);
+        btnOrien=(ImageButton)findViewById(R.id.imageButton_Orienteering);
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -43,7 +44,12 @@ public class home extends AppCompatActivity {
                 photo();
             }
         });
-
+        btnOrien.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                homeOrienteering();
+            }
+        });
     }
     public void list(){
         Intent intent = new Intent(this, life.class);
@@ -63,5 +69,8 @@ public class home extends AppCompatActivity {
         Intent intent = new Intent(this, phto.class);
         startActivity(intent);
     }
-
+    public void homeOrienteering(){
+        Intent intent = new Intent(this, orienteering.class);
+        startActivity(intent);
+    }
 }
