@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">新城練習曲</string>
     <string name="title_activity_maps">Map</string>
     <string name="mapsbutton"><![CDATA[交通需要幫助? 點這裡->]]></string>
     <string name="textview">TextView</string>
@@ -199,6 +199,30 @@
         <item>僅供預約</item>
         <item>0989-024-051</item>
         <item>聽海小院FB : https://reurl.cc/nndrl6</item>
+    </string-array>
+
+    <string-array name="orienteering_0">
+        <item>[起點]</item>
+        <item>新城車站</item>
+        <item>24.1275</item>
+        <item>121.6409</item>
+        <item>坐落太魯閣國家公園入口的新城(太魯閣)車站，於101年11月開工進行改建，其嶄新建築之站體就如同一件藝術品，以「門」的意象形塑本車站，參採隱喻立霧溪切割太魯閣峽谷，呈現V形的立面，展現花東第一門面之氣勢與獨特迎賓視覺的意象，另書法家朱振南老師為車站站名題字更增添文化氣息，車站改建後除了有便利的旅運設施、友善車站環境，同時亦將公共藝術之美學引領至公共空間，使交通與人文藝術有美麗邂逅。</item>
+    </string-array>
+
+    <string-array name="orienteering_1">
+        <item>[第1關]</item>
+        <item>新城火車站</item>
+        <item>24.1275</item>
+        <item>121.6409</item>
+        <item>坐落太魯閣國家公園入口的新城(太魯閣)車站，於101年11月開工進行改建，其嶄新建築之站體就如同一件藝術品，以「門」的意象形塑本車站，參採隱喻立霧溪切割太魯閣峽谷，呈現V形的立面，展現花東第一門面之氣勢與獨特迎賓視覺的意象，另書法家朱振南老師為車站站名題字更增添文化氣息，車站改建後除了有便利的旅運設施、友善車站環境，同時亦將公共藝術之美學引領至公共空間，使交通與人文藝術有美麗邂逅。</item>
+    </string-array>
+
+    <string-array name="orienteering_2">
+        <item>[第2關]</item>
+        <item>新城火車站</item>
+        <item>24.1275</item>
+        <item>121.6409</item>
+        <item>坐落太魯閣國家公園入口的新城(太魯閣)車站，於101年11月開工進行改建，其嶄新建築之站體就如同一件藝術品，以「門」的意象形塑本車站，參採隱喻立霧溪切割太魯閣峽谷，呈現V形的立面，展現花東第一門面之氣勢與獨特迎賓視覺的意象，另書法家朱振南老師為車站站名題字更增添文化氣息，車站改建後除了有便利的旅運設施、友善車站環境，同時亦將公共藝術之美學引領至公共空間，使交通與人文藝術有美麗邂逅。</item>
     </string-array>
 
 </resources>
