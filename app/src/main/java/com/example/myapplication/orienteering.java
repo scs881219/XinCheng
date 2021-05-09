@@ -28,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,6 +50,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
     private int levelNow = 0;
     private String[] orienSpots;
+    public Marker spotMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,9 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
                 orienSpots = getResources().getStringArray(R.array.orienteering_2); break;
         }
         String spotTitle = orienSpots[0] + " " + orienSpots[1];
+        String spotDescr = orienSpots[4];
         textSpotName.setText(spotTitle);
+        textSpotDesc.setText(spotDescr);
         //btnNext.setEnabled(false);
     }
 
@@ -112,10 +116,12 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng eiffel = new LatLng(24.1275, 121.6409);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eiffel, 16));
-
         enableUserLocation();
-
         mMap.setOnMapLongClickListener(this);
+
+        LatLng spotLatLng = new LatLng(Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]));
+        spotMarker=mMap.addMarker(new MarkerOptions().position(spotLatLng).title(orienSpots[1]).snippet(orienSpots[0]));
+        spotMarker.setTag(0);
     }
 
     private void enableUserLocation() {
