@@ -270,4 +270,12 @@
         <item>【 不賣書的書店 and 練習人生大小事 】棒球教練與好友，一同在花蓮靠山面海的小村莊，開設的書店，提供旅人 / 學生 / 社區居民，( 免費借閱 ) 書籍的書店。</item>
     </string-array>
 
+    <string-array name="orienteering_7">
+        <item> </item>
+        <item>恭喜完成！</item>
+        <item>24.129133</item>
+        <item>121.650674</item>
+        <item>更多新城的故事，散布在各個日常的角落，等著你發現！</item>
+    </string-array>
+
 </resources>

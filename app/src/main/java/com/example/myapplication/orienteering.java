@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.Criteria;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,17 +43,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-
 import java.util.List;
 
 public class orienteering extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener, LocationListener {
     private ImageButton btnHome;
     private Button btnNext;
     private TextView textSpotName, textSpotDesc;
+    private ImageView orienCard;
+    private LocationManager locationManager;
     private static final String TAG = "Orienteering";
 
     private GoogleMap mMap;
@@ -59,10 +60,13 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
     private float GEOFENCE_RADIUS = 200;
     private String GEOFENCE_ID = "SOME_GEOFENCE_ID";
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
     private String[] orienSpots;
-    public Marker spotMarker0, spotMarker1, spotMarker2, spotMarker3, spotMarker4, spotMarker5, pos;
+    public Marker spotMarker0, pos;
+    public boolean first = true;
+    String bestProv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         btnNext=(Button)findViewById(R.id.button_OrienNext);
         textSpotName=(TextView)findViewById(R.id.textView_OrienTitle);
         textSpotDesc=(TextView)findViewById(R.id.textView_OrienDescribe);
+        orienCard=(ImageView)findViewById(R.id.imageView_orienCard);
 
 
         btnHome.setOnClickListener(new View.OnClickListener(){
@@ -84,7 +89,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(orienLevel.getLevel() == 5){
+                if(orienLevel.getLevel() == 7){
                     orienLevel.setLevel(0);
                 }
                 else {
@@ -119,21 +124,35 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         switch (level) {
             case 0:
                 orienSpots = getResources().getStringArray(R.array.orienteering_0);
+                orienCard.setImageResource(R.drawable.oriencard_00);
                 break;
             case 1:
                 orienSpots = getResources().getStringArray(R.array.orienteering_1);
+                orienCard.setImageResource(R.drawable.oriencard_01);
                 break;
             case 2:
                 orienSpots = getResources().getStringArray(R.array.orienteering_2);
+                orienCard.setImageResource(R.drawable.oriencard_02);
                 break;
             case 3:
                 orienSpots = getResources().getStringArray(R.array.orienteering_3);
+                orienCard.setImageResource(R.drawable.oriencard_03);
                 break;
             case 4:
                 orienSpots = getResources().getStringArray(R.array.orienteering_4);
+                orienCard.setImageResource(R.drawable.oriencard_04);
                 break;
             case 5:
                 orienSpots = getResources().getStringArray(R.array.orienteering_5);
+                orienCard.setImageResource(R.drawable.oriencard_05);
+                break;
+            case 6:
+                orienSpots = getResources().getStringArray(R.array.orienteering_6);
+                orienCard.setImageResource(R.drawable.oriencard_06);
+                break;
+            case 7:
+                orienSpots = getResources().getStringArray(R.array.orienteering_7);
+                orienCard.setImageResource(R.drawable.oriencard_07);
                 btnNext.setText("恭喜遍歷新城！想要再試一次嗎？");
                 break;
             }
@@ -141,8 +160,6 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         String spotDescr = orienSpots[4];
         textSpotName.setText(spotTitle);
         textSpotDesc.setText(spotDescr);
-
-
         //btnNext.setEnabled(false);
     }
 
@@ -160,10 +177,10 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
         LatLng spotLatLng = new LatLng(Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spotLatLng, 16));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spotLatLng, 17));
         enableUserLocation();
         mMap.setOnMapLongClickListener(this);
-        addGeofence(spotLatLng, 80);
+        addGeofence(spotLatLng, 35);
 
         LatLng tempLatLng;
         String[] tempSpots = getResources().getStringArray(R.array.orienteering_0);
@@ -182,11 +199,15 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
                 tempSpots = getResources().getStringArray(R.array.orienteering_4);  break;
             case(5):
                 tempSpots = getResources().getStringArray(R.array.orienteering_5);  break;
+            case(6):
+                tempSpots = getResources().getStringArray(R.array.orienteering_6);  break;
+            case(7):
+                tempSpots = getResources().getStringArray(R.array.orienteering_7);  break;
         }
         tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
         spotMarker0 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
         spotMarker0.setTag(0);
-        addCircle(tempLatLng, 30);
+        addCircle(tempLatLng, 35);
 
         //addCircle(spotLatLng, 80);
         //spotMarker=mMap.addMarker(new MarkerOptions().position(spotLatLng).title(orienSpots[1]).snippet(orienSpots[0]));
@@ -195,15 +216,30 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
+        if(first){
+            first = false;
+        }
+        else{
+            pos.remove();
+        }
+
         LatLng Point = new LatLng(location.getLatitude(), location.getLongitude());
         pos=mMap.addMarker(new MarkerOptions().title("現在位置").position(Point).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         pos.setTag(100);
-        LatLng spotLatLng = new LatLng(Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]));
+
+        float[] results = new float[1];
+        Location.distanceBetween(location.getLatitude(), location.getLongitude(), Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]), results);
+        if (results[0] <= 35){
+            btnNext.setText("恭喜！準備前往下個故事吧！");
+        }
+        textSpotName.setText(String.valueOf(results[0]));
     }
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
-
+        Criteria criteria = new Criteria();
+        bestProv = locationManager.getBestProvider(criteria, true);
+        btnNext.setText("恭喜！準備前往下個故事吧！");
     }
 
     @Override
