@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -37,9 +39,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+
 import java.util.List;
 
-public class orienteering extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+public class orienteering extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener, LocationListener {
     private ImageButton btnHome;
     private Button btnNext;
     private TextView textSpotName, textSpotDesc;
@@ -55,7 +62,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
     private String[] orienSpots;
-    public Marker spotMarker;
+    public Marker spotMarker0, spotMarker1, spotMarker2, spotMarker3, spotMarker4, spotMarker5, pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 orienLevel.setLevel(orienLevel.getLevel() + 1);
                 nextLevel(orienLevel.getLevel());
+
             }
         });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -95,28 +103,42 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
     public void nextLevel(int level) {
         switch (level) {
             case 0:
-                orienSpots = getResources().getStringArray(R.array.orienteering_0); break;
+                orienSpots = getResources().getStringArray(R.array.orienteering_0);
+                spotMarker0.setVisible(true);
+                break;
             case 1:
-                orienSpots = getResources().getStringArray(R.array.orienteering_1); break;
+                orienSpots = getResources().getStringArray(R.array.orienteering_1);
+                //spotMarker0.setVisible(false);
+                //spotMarker1.setVisible(true);
+                break;
             case 2:
-                orienSpots = getResources().getStringArray(R.array.orienteering_2); break;
+                orienSpots = getResources().getStringArray(R.array.orienteering_2);
+                //spotMarker1.setVisible(false);
+                //spotMarker2.setVisible(true);
+                break;
             case 3:
-                orienSpots = getResources().getStringArray(R.array.orienteering_3); break;
+                orienSpots = getResources().getStringArray(R.array.orienteering_3);
+                //spotMarker2.setVisible(false);
+                //spotMarker3.setVisible(true);
+                break;
             case 4:
-                orienSpots = getResources().getStringArray(R.array.orienteering_4); break;
+                orienSpots = getResources().getStringArray(R.array.orienteering_4);
+                //spotMarker3.setVisible(false);
+                //spotMarker4.setVisible(true);
+                break;
             case 5:
                 orienSpots = getResources().getStringArray(R.array.orienteering_5);
+                //spotMarker4.setVisible(false);
+                //spotMarker5.setVisible(true);
                 btnNext.setEnabled(false);
                 break;
             }
+        orienSpots = getResources().getStringArray(R.array.orienteering_0);
         String spotTitle = orienSpots[0] + " " + orienSpots[1];
         String spotDescr = orienSpots[4];
         textSpotName.setText(spotTitle);
         textSpotDesc.setText(spotDescr);
-        LatLng spotLatLng = new LatLng(Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]));
-        addGeofence(spotLatLng, 80);
-        addMarker(spotLatLng);
-        addCircle(spotLatLng, 80);
+
         //btnNext.setEnabled(false);
     }
 
@@ -137,10 +159,75 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spotLatLng, 16));
         enableUserLocation();
         mMap.setOnMapLongClickListener(this);
+        addGeofence(spotLatLng, 80);
 
+        LatLng tempLatLng;
+        String[] tempSpots;
+
+        tempSpots = getResources().getStringArray(R.array.orienteering_0);
+        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
+        spotMarker0 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
+        spotMarker0.setTag(0);
+        spotMarker0.setVisible(false);
+
+        tempSpots = getResources().getStringArray(R.array.orienteering_1);
+        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
+        spotMarker1 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
+        spotMarker1.setTag(1);
+        spotMarker1.setVisible(false);
+
+        tempSpots = getResources().getStringArray(R.array.orienteering_2);
+        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
+        spotMarker2 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
+        spotMarker2.setTag(2);
+        spotMarker2.setVisible(false);
+
+        tempSpots = getResources().getStringArray(R.array.orienteering_3);
+        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
+        spotMarker3 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
+        spotMarker3.setTag(3);
+        spotMarker3.setVisible(false);
+
+        tempSpots = getResources().getStringArray(R.array.orienteering_4);
+        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
+        spotMarker4 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
+        spotMarker4.setTag(4);
+        spotMarker4.setVisible(false);
+
+        tempSpots = getResources().getStringArray(R.array.orienteering_5);
+        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
+        spotMarker5 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
+        spotMarker5.setTag(5);
+        spotMarker5.setVisible(false);
+
+        //addCircle(spotLatLng, 80);
         //spotMarker=mMap.addMarker(new MarkerOptions().position(spotLatLng).title(orienSpots[1]).snippet(orienSpots[0]));
         //spotMarker.setTag(0);
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        LatLng Point = new LatLng(location.getLatitude(), location.getLongitude());
+        pos=mMap.addMarker(new MarkerOptions().title("現在位置").position(Point).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        pos.setTag(100);
+        LatLng spotLatLng = new LatLng(Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]));
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+
 
     private void enableUserLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
