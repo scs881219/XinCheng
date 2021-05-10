@@ -73,7 +73,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         btnNext=(Button)findViewById(R.id.button_OrienNext);
         textSpotName=(TextView)findViewById(R.id.textView_OrienTitle);
         textSpotDesc=(TextView)findViewById(R.id.textView_OrienDescribe);
-        nextLevel(orienLevel.getLevel());
+
 
         btnHome.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,9 +84,13 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orienLevel.setLevel(orienLevel.getLevel() + 1);
-                nextLevel(orienLevel.getLevel());
-
+                if(orienLevel.getLevel() == 5){
+                    orienLevel.setLevel(0);
+                }
+                else {
+                    orienLevel.setLevel(orienLevel.getLevel() + 1);
+                }
+                pageRefresh();
             }
         });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -95,49 +99,49 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
+        nextLevel(orienLevel.getLevel());
+
         geofencingClient = LocationServices.getGeofencingClient(this);
         geofenceHelper = new GeofenceHelper(this);
 
+    }
+
+    public void pageRefresh(){
+        //Intent intent = new Intent(this, orienteering.class);
+        //startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     public void nextLevel(int level) {
         switch (level) {
             case 0:
                 orienSpots = getResources().getStringArray(R.array.orienteering_0);
-                spotMarker0.setVisible(true);
                 break;
             case 1:
                 orienSpots = getResources().getStringArray(R.array.orienteering_1);
-                //spotMarker0.setVisible(false);
-                //spotMarker1.setVisible(true);
                 break;
             case 2:
                 orienSpots = getResources().getStringArray(R.array.orienteering_2);
-                //spotMarker1.setVisible(false);
-                //spotMarker2.setVisible(true);
                 break;
             case 3:
                 orienSpots = getResources().getStringArray(R.array.orienteering_3);
-                //spotMarker2.setVisible(false);
-                //spotMarker3.setVisible(true);
                 break;
             case 4:
                 orienSpots = getResources().getStringArray(R.array.orienteering_4);
-                //spotMarker3.setVisible(false);
-                //spotMarker4.setVisible(true);
                 break;
             case 5:
                 orienSpots = getResources().getStringArray(R.array.orienteering_5);
-                //spotMarker4.setVisible(false);
-                //spotMarker5.setVisible(true);
-                btnNext.setEnabled(false);
+                btnNext.setText("恭喜遍歷新城！想要再試一次嗎？");
                 break;
             }
-        orienSpots = getResources().getStringArray(R.array.orienteering_0);
         String spotTitle = orienSpots[0] + " " + orienSpots[1];
         String spotDescr = orienSpots[4];
         textSpotName.setText(spotTitle);
         textSpotDesc.setText(spotDescr);
+
 
         //btnNext.setEnabled(false);
     }
@@ -162,43 +166,27 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         addGeofence(spotLatLng, 80);
 
         LatLng tempLatLng;
-        String[] tempSpots;
+        String[] tempSpots = getResources().getStringArray(R.array.orienteering_0);
 
-        tempSpots = getResources().getStringArray(R.array.orienteering_0);
+        GlobalVariable orienLevel = (GlobalVariable)getApplicationContext();
+        switch(orienLevel.getLevel()){
+            case(0):
+                tempSpots = getResources().getStringArray(R.array.orienteering_0);  break;
+            case(1):
+                tempSpots = getResources().getStringArray(R.array.orienteering_1);  break;
+            case(2):
+                tempSpots = getResources().getStringArray(R.array.orienteering_2);  break;
+            case(3):
+                tempSpots = getResources().getStringArray(R.array.orienteering_3);  break;
+            case(4):
+                tempSpots = getResources().getStringArray(R.array.orienteering_4);  break;
+            case(5):
+                tempSpots = getResources().getStringArray(R.array.orienteering_5);  break;
+        }
         tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
         spotMarker0 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
         spotMarker0.setTag(0);
-        spotMarker0.setVisible(false);
-
-        tempSpots = getResources().getStringArray(R.array.orienteering_1);
-        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
-        spotMarker1 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
-        spotMarker1.setTag(1);
-        spotMarker1.setVisible(false);
-
-        tempSpots = getResources().getStringArray(R.array.orienteering_2);
-        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
-        spotMarker2 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
-        spotMarker2.setTag(2);
-        spotMarker2.setVisible(false);
-
-        tempSpots = getResources().getStringArray(R.array.orienteering_3);
-        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
-        spotMarker3 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
-        spotMarker3.setTag(3);
-        spotMarker3.setVisible(false);
-
-        tempSpots = getResources().getStringArray(R.array.orienteering_4);
-        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
-        spotMarker4 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
-        spotMarker4.setTag(4);
-        spotMarker4.setVisible(false);
-
-        tempSpots = getResources().getStringArray(R.array.orienteering_5);
-        tempLatLng = new LatLng(Float.parseFloat(tempSpots[2]), Float.parseFloat(tempSpots[3]));
-        spotMarker5 = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(tempSpots[1]).snippet(tempSpots[0]));
-        spotMarker5.setTag(5);
-        spotMarker5.setVisible(false);
+        addCircle(tempLatLng, 30);
 
         //addCircle(spotLatLng, 80);
         //spotMarker=mMap.addMarker(new MarkerOptions().position(spotLatLng).title(orienSpots[1]).snippet(orienSpots[0]));

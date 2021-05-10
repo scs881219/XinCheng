@@ -254,11 +254,11 @@
     </string-array>
 
     <string-array name="orienteering_6">
-        <item>[第6關]</item>
-        <item>新城照相館</item>
-        <item>24.126449</item>
-        <item>121.651888</item>
-        <item>一個太魯閣國家公園旁的小村落，因為台九線外環道開拓而沒落，也因為佳興檸檬汁而帶來人潮，我們希望用友善環境來改變這裡，歡迎大家一起來活化老屋、關心農業、改變地方產業生態。</item>
+        <item>[終點]</item>
+        <item>練習曲書店</item>
+        <item>24.129133</item>
+        <item>121.650674</item>
+        <item>【 不賣書的書店 and 練習人生大小事 】棒球教練與好友，一同在花蓮靠山面海的小村莊，開設的書店，提供旅人 / 學生 / 社區居民，( 免費借閱 ) 書籍的書店。</item>
     </string-array>
 
 </resources>
