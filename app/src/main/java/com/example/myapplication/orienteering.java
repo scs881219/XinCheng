@@ -2,17 +2,15 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.location.Criteria;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +26,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
-import com.google.android.gms.location.GeofencingEvent;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -43,10 +40,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.util.List;
-
 public class orienteering extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener, LocationListener {
-    private ImageButton btnHome;
+    private ImageButton btnHome, btnDevPass;
     private Button btnNext;
     private TextView textSpotName, textSpotDesc;
     private ImageView orienCard;
@@ -67,18 +62,19 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
     public Marker spotMarker0, pos;
     public boolean first = true;
     String bestProv;
+    private int btnDevPassCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orienteering);
         GlobalVariable orienLevel = (GlobalVariable)getApplicationContext();
-        btnHome=(ImageButton)findViewById(R.id.imageButton12);
-        btnNext=(Button)findViewById(R.id.button_OrienNext);
+        btnHome = (ImageButton) findViewById(R.id.imageButton12);
+        btnDevPass = (ImageButton) findViewById(R.id.imageButton_devPassHidden);
+        btnNext = (Button) findViewById(R.id.button_OrienNext);
         textSpotName=(TextView)findViewById(R.id.textView_OrienTitle);
         textSpotDesc=(TextView)findViewById(R.id.textView_OrienDescribe);
         orienCard=(ImageView)findViewById(R.id.imageView_orienCard);
-
 
         btnHome.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -86,32 +82,52 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
                 finish();
             }
         });
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(orienLevel.getLevel() == 7){
+                if (orienLevel.getLevel() == 7) {
                     orienLevel.setLevel(0);
-                }
-                else {
+                } else {
                     orienLevel.setLevel(orienLevel.getLevel() + 1);
                 }
                 pageRefresh();
             }
         });
+
+        btnDevPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnDevPassCount++;
+                if (btnDevPassCount == 5) {
+                    achieveSpot();
+                }
+            }
+        });
+
+        newLevel(orienLevel.getLevel());
+
+        Handler handler = new Handler();
+        final Runnable devBtnCL = new Runnable() {
+            public void run() {
+                btnDevPassCount = 0;
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.postDelayed(devBtnCL, 1000);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapOrien);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        nextLevel(orienLevel.getLevel());
-
         geofencingClient = LocationServices.getGeofencingClient(this);
         geofenceHelper = new GeofenceHelper(this);
 
     }
 
-    public void pageRefresh(){
+    public void pageRefresh() {
         //Intent intent = new Intent(this, orienteering.class);
         //startActivity(intent);
         finish();
@@ -120,7 +136,9 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         overridePendingTransition(0, 0);
     }
 
-    public void nextLevel(int level) {
+    public void newLevel(int level) {
+        btnNext.setText(getString(R.string.orienBtn_Default));
+        btnNext.setEnabled(false);
         switch (level) {
             case 0:
                 orienSpots = getResources().getStringArray(R.array.orienteering_0);
@@ -149,18 +167,19 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
             case 6:
                 orienSpots = getResources().getStringArray(R.array.orienteering_6);
                 orienCard.setImageResource(R.drawable.oriencard_06);
+                btnNext.setText(getString(R.string.orienBtn_FinishPre));
                 break;
             case 7:
                 orienSpots = getResources().getStringArray(R.array.orienteering_7);
                 orienCard.setImageResource(R.drawable.oriencard_07);
-                btnNext.setText("恭喜遍歷新城！想要再試一次嗎？");
+                btnNext.setText(getString(R.string.orienBtn_Finish));
+                btnNext.setEnabled(true);
                 break;
-            }
+        }
         String spotTitle = orienSpots[0] + " " + orienSpots[1];
         String spotDescr = orienSpots[4];
         textSpotName.setText(spotTitle);
         textSpotDesc.setText(spotDescr);
-        //btnNext.setEnabled(false);
     }
 
     /**
@@ -214,12 +233,16 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         //spotMarker.setTag(0);
     }
 
+    public void achieveSpot() {
+        btnNext.setEnabled(true);
+        btnNext.setText(getString(R.string.orienBtn_Pass));
+    }
+
     @Override
     public void onLocationChanged(Location location) {
-        if(first){
+        if (first) {
             first = false;
-        }
-        else{
+        } else {
             pos.remove();
         }
 
@@ -230,7 +253,7 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
         float[] results = new float[1];
         Location.distanceBetween(location.getLatitude(), location.getLongitude(), Float.parseFloat(orienSpots[2]), Float.parseFloat(orienSpots[3]), results);
         if (results[0] <= 35){
-            btnNext.setText("恭喜！準備前往下個故事吧！");
+            achieveSpot();
         }
         textSpotName.setText(String.valueOf(results[0]));
     }
@@ -239,7 +262,6 @@ public class orienteering extends FragmentActivity implements OnMapReadyCallback
     public void onStatusChanged(String s, int i, Bundle bundle) {
         Criteria criteria = new Criteria();
         bestProv = locationManager.getBestProvider(criteria, true);
-        btnNext.setText("恭喜！準備前往下個故事吧！");
     }
 
     @Override

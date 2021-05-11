@@ -283,4 +283,9 @@
         <item>更多新城的故事，散布在各個日常的角落，等著你細細品嘗！</item>
     </string-array>
 
+    <string name="orienBtn_Default">前往故事點以通關</string>
+    <string name="orienBtn_Pass">下一個故事點</string>
+    <string name="orienBtn_FinishPre">完成！</string>
+    <string name="orienBtn_Finish">想要再次品嘗新城故事嗎？</string>
+
 </resources>
