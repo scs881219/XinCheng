@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">新城練習曲</string>
     <string name="title_activity_maps">Map</string>
     <string name="mapsbutton"><![CDATA[交通需要幫助? 點這裡->]]></string>
     <string name="textview">TextView</string>
@@ -200,5 +200,92 @@
         <item>0989-024-051</item>
         <item>聽海小院FB : https://reurl.cc/nndrl6</item>
     </string-array>
+
+    <string-array name="orienteering_0">
+        <item>[起點]</item>
+        <item>新城車站</item>
+        <item>24.1275</item>
+        <item>121.6409</item>
+        <item>坐落太魯閣國家公園入口的新城(太魯閣)車站，於101年11月開工進行改建，其嶄新建築之站體就如同一件藝術品，
+              以「門」的意象形塑本車站，參採隱喻立霧溪切割太魯閣峽谷，呈現V形的立面，展現花東第一門面之氣勢與獨特迎賓視覺的意象，
+              另書法家朱振南老師為車站站名題字更增添文化氣息，車站改建後除了有便利的旅運設施、友善車站環境，同時亦將公共藝術之美學引領至公共空間，
+              使交通與人文藝術有美麗邂逅。</item>
+    </string-array>
+
+    <string-array name="orienteering_1">
+        <item>[第1關]</item>
+        <item>斯土有情陶藝坊</item>
+        <item>24.126032</item>
+        <item>121.652292</item>
+        <item>斯土有情陶藝工作室位於花蓮，並於山中蓋了柴窯，致力於柴燒的研究。設計師堅持手拉手捏也親自劈木燒陶
+              努力將物器以自然樸實的方式呈現出來讓消費者拿在手上享受那份溫暖</item>
+    </string-array>
+
+    <string-array name="orienteering_2">
+        <item>[第2關]</item>
+        <item>新城照相館</item>
+        <item>24.126449</item>
+        <item>121.651888</item>
+        <item>日治初期立霧溪發現沙金，花蓮縣新城鄉的新城村被日本人規劃為移民村。\n
+            而這棟老舊斑駁、屋齡已逾140年的日式建築：新城照相館，目前應算是花蓮縣內屋齡最久的私有日式老建築，
+            照相館內現仍保存半世紀前的老舊照相攝備。\n\n
+            走過半世紀的照相館，為當地人留下了青春的影像，也見證新城村的興旺與繁榮，流露出花蓮鄉下獨特濃厚的風情，
+            留下日治時代迄今的歷史軌跡。</item>
+    </string-array>
+
+    <string-array name="orienteering_3">
+        <item>[第3關]</item>
+        <item>佳興冰果室</item>
+        <item>24.126521</item>
+        <item>121.651940</item>
+        <item>花蓮必訪60年老店-【佳興冰果室】
+              每一口都能喝到實在的感覺，絕不添加檸檬酸劑、防腐劑，讓您喝得健康安心！
+              我們與果農契作，無毒種植，保證每顆檸檬都是健康優質，採收後，用清水沖洗外皮，整顆檸檬連皮打汁，
+              檸檬的酸與煉乳的香甜平衡恰到好處，獨特口感，製作過程繁瑣，因此每日限量瓶數，感謝您的支持與等待。\n\n
+              #佳興冰果室堅持三大訴求：\n
+              1. 使用台糖生產的砂糖熬煮\n
+              2. 經三聚氰胺、塑化劑等檢驗合格的煉乳\n
+              3. 不添加檸檬酸劑、防腐劑</item>
+    </string-array>
+
+    <string-array name="orienteering_4">
+        <item>[第4關]</item>
+        <item>新城藝術電力公司</item>
+        <item>24.127153</item>
+        <item>121.650997</item>
+        <item>練習曲書店整理了閒置的台電大樓，在藝文活動缺乏的花蓮北區打造了『新城藝術電力公司』，
+            未來將陸續有不同的藝術活動、講座、展覽，讓偏鄉小村莊，擁有更多美好的事物。</item>
+    </string-array>
+
+    <string-array name="orienteering_5">
+        <item>[第5關]</item>
+        <item>新城天主堂</item>
+        <item>24.129125</item>
+        <item>121.650408</item>
+        <item>1956年新城天主堂落成在新城神社原址，諾亞方舟的造型有著新生再造的意義，天主堂洗石子的牆面爬滿了青綠色的藤蔓，
+            內部莊嚴潔淨，兩側窗戶鑲嵌彩繪玻璃，後有聖洗池及告解區。</item>
+    </string-array>
+
+    <string-array name="orienteering_6">
+        <item>[終點]</item>
+        <item>練習曲書店</item>
+        <item>24.129133</item>
+        <item>121.650674</item>
+        <item>【不賣書的書店 and 練習人生大小事】\n棒球教練與好友，一同在花蓮靠山面海的小村莊，開設的書店，
+            提供 旅人/學生/社區居民，免費借閱書籍的書店。</item>
+    </string-array>
+
+    <string-array name="orienteering_7">
+        <item> </item>
+        <item>恭喜完成！</item>
+        <item>24.129133</item>
+        <item>121.650674</item>
+        <item>更多新城的故事，散布在各個日常的角落，等著你細細品嘗！</item>
+    </string-array>
+
+    <string name="orienBtn_Default">前往故事點以通關</string>
+    <string name="orienBtn_Pass">下一個故事點</string>
+    <string name="orienBtn_FinishPre">完成！</string>
+    <string name="orienBtn_Finish">想要再次品嘗新城故事嗎？</string>
 
 </resources>
