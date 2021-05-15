@@ -62,8 +62,7 @@ public class transport extends AppCompatActivity {
         startActivity(intent);
     }
     public void btn(){
-        Intent intent = new Intent(this, home.class);
-        startActivity(intent);
+        finish();
     }
 
 }

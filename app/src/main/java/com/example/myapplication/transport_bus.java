@@ -43,8 +43,8 @@ public class transport_bus extends AppCompatActivity {
     }
 
     public void back(){
-        Intent intent = new Intent(this, transport.class);
-        startActivity(intent);
+        finish();
+
     }
 
 }
